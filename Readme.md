@@ -2,9 +2,15 @@
 
 Tiny Express-inspired client-side router.
 
- [![Build Status](https://travis-ci.org/visionmedia/page.js.svg?branch=master)](https://travis-ci.org/visionmedia/page.js)
-[![Coverage Status](https://coveralls.io/repos/visionmedia/page.js/badge.svg?branch=master)](https://coveralls.io/r/visionmedia/page.js?branch=master)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/visionmedia/page.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+# What's different between my version and the original version:
+
+- Added option for a routerId to disinguish between multiple apps that all use different instances of `page`
+
+```js
+page({ routerId: "YOUR_APP_NAME" });
+```
+
+# --- ORIGINAL README BELOW ---
 
 ```js
 page('/', index)
