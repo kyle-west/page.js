@@ -592,6 +592,9 @@ pathToRegexp_1.tokensToRegExp = tokensToRegExp_1;
     options = options || {};
     if (running) return;
     running = true;
+
+    page.id = options.routerId || "GLOBAL_PAGE_ROUTER";
+
     pageWindow = options.window || (hasWindow && window);
     if (false === options.dispatch) dispatch = false;
     if (false === options.decodeURLComponents) decodeURLComponents = false;
@@ -844,10 +847,11 @@ pathToRegexp_1.tokensToRegExp = tokensToRegExp_1;
     this.title = (hasDocument && pageWindow.document.title);
     this.state = state || {};
     this.state.path = path;
+    this.state.router = page.id;
     this.querystring = ~i ? decodeURLEncodedURIComponent(path.slice(i + 1)) : '';
     this.pathname = decodeURLEncodedURIComponent(~i ? path.slice(0, i) : path);
     this.params = {};
-
+    
     // fragment
     this.hash = '';
     if (!hashbang) {
@@ -992,7 +996,11 @@ pathToRegexp_1.tokensToRegExp = tokensToRegExp_1;
       if (!loaded) return;
       if (e.state) {
         var path = e.state.path;
-        page.replace(path, e.state);
+        if (e.state.router === page.id) {
+          page.replace(path, e.state);
+        } else {
+          pageWindow.location = path;
+        }
       } else if (isLocation) {
         var loc = pageWindow.location;
         page.show(loc.pathname + loc.hash, undefined, undefined, false);
