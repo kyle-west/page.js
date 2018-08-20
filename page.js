@@ -993,7 +993,6 @@ pathToRegexp_1.tokensToRegExp = tokensToRegExp_1;
       });
     }
     return function onpopstate(e) {
-      debugger;
       if (!loaded) return;
       if (e.state) {
         var path = e.state.path;
